@@ -1,0 +1,21 @@
+.login-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 5% auto;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+mat-form-field {
+    display: block;
+    width: 80%;
+    box-sizing: border-box;
+}

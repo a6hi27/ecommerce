@@ -1,0 +1,20 @@
+<!-- filters.component.html -->
+<mat-card>
+    <h2>Filters</h2>
+
+    <!-- Ratings Filter -->
+    <mat-slider thumbLabel tickInterval="1" min="1" max="5" [(ngModel)]="selectedRating">
+        <div class="slider-label">Ratings: {{ selectedRating }}</div>
+    </mat-slider>
+
+    <!-- Brands Filter -->
+    <div>
+        <h3>Brands:</h3>
+        <mat-checkbox *ngFor="let brand of brands" [(ngModel)]="selectedBrands[brand]">{{ brand }}</mat-checkbox>
+    </div>
+
+    <!-- Price Filter -->
+    <mat-slider thumbLabel tickInterval="50" min="0" max="1000" [(ngModel)]="selectedPrice">
+        <div class="slider-label">Price: {{ selectedPrice | currency: 'USD' }}</div>
+    </mat-slider>
+</mat-card>

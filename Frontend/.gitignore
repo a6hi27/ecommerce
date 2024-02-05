@@ -1,0 +1,22 @@
+# compiled output
+/dist
+/tmp
+/out-tsc
+.angular
+# dependencies
+/node_modules
+# local npm configuration
+/.npmrc
+
+# lockfile
+/package-lock.json
+
+# Visual Studio Code specific files
+.vscode
+/.vscode/*
+
+# IDE-specific files
+/.idea
+
+# editor backup files
+*.swp

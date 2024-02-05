@@ -1,0 +1,9 @@
+button{
+    cursor: pointer; 
+ }
+.toolbar-space {
+    flex: 1 1 auto;
+}
+.login-button{
+    margin-right: 2%;
+}

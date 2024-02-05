@@ -1,0 +1,13 @@
+<div class="container">
+  <form [formGroup]="searchForm" class="searchBar" (ngSubmit)="onSearchSubmit()">
+    <input type="text" placeholder="Search..." formControlName="searchValue" class="searchBarInput" />
+  </form>
+  <div class="articlesTable">
+    <div class="article" *ngFor="let article of articles">
+      <img [src]="article.imageUrl" [alt]="article.name">
+      {{article.name}}
+      {{article.price}}
+      {{article.size}}
+    </div>
+  </div>
+</div>

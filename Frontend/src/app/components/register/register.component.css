@@ -1,0 +1,22 @@
+.register-card {
+    width: 80%;
+    margin: 5% auto;
+    overflow: auto;
+}
+.register-form{
+    text-align: center;
+}
+
+mat-form-field {
+    display: block;
+    margin: auto;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.error-message{
+    color: rgba(227, 13, 13, 0.797);
+    margin:auto;
+    width: 80%;
+    display: block; 
+}
