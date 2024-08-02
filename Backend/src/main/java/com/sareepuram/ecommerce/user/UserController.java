@@ -1,6 +1,7 @@
 package com.sareepuram.ecommerce.user;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -20,33 +24,29 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("users")
+    @GetMapping("/")
+    public ResponseEntity<?> goToHome() {
+        return (ResponseEntity.ok("Welcome to my homepage"));
+    }
+
+    @GetMapping("user")
     public ResponseEntity<List<User>> findAll() {
-        List<User> users = userService.findAll();
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+        List<User> user = userService.findAll();
+//        List<UserDTO> userDTO = userService.findAll().stream().map(user -> new UserDTO(user.getUserId(), user.getName(), user.getEmail())).collect(Collectors.toList());
+        return new ResponseEntity<List<User>>(user, HttpStatus.OK);
     }
 
-    @GetMapping("users/{email}")
-    public ResponseEntity<?> findByEmail(@PathVariable String email) {
-        Object user = userService.findByEmail(email);
-        if (user instanceof User)
-            return ResponseEntity.ok((User) user);
-        else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(user);
+    @PostMapping("user")
+    public ResponseEntity<User> addUser(@RequestBody User user) {
+        return new ResponseEntity<User>(userService.addUser(user), HttpStatus.OK);
     }
 
-    @PostMapping("users")
-    public ResponseEntity<String> addUser(@RequestBody User user) {
-        userService.addUser(user);
-        return new ResponseEntity<String>("User was created successfully!", HttpStatus.OK);
-    }
-
-    @PutMapping("users/{id}")
+    @PutMapping("user/{id}")
     public void updateUser(@RequestBody User user) {
         userService.updateUser(user);
     }
 
-    @DeleteMapping("users/{id}")
+    @DeleteMapping("user/{id}")
     public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
     }
