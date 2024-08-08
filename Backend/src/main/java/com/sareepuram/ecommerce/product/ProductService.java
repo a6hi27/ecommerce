@@ -5,10 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
@@ -38,5 +40,9 @@ public class ProductService {
     //Add a product to product table
     public Product addProduct(Product product) {
         return productRepository.save(product);
+    }
+
+    public Integer deleteProduct(Product product) {
+        return productRepository.deleteByProductId(product.getProductId());
     }
 }

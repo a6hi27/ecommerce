@@ -6,10 +6,7 @@ import com.sareepuram.ecommerce.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.sareepuram.ecommerce.user.UserService;
 
@@ -30,9 +27,14 @@ public class CartController {
     }
 
     @PostMapping("user/cart")
-    public ResponseEntity<CartDTO> addorUpdateProductInCart(@RequestBody CartDTO cartDTO, HttpSession httpSession) {
+    public ResponseEntity<CartDTO> addOrUpdateProductInCart(@RequestBody CartDTO cartDTO, HttpSession httpSession) {
         return new ResponseEntity<CartDTO>(cartService.addOrUpdateProductInCart(cartDTO,
                 userService.getCurrentUser(httpSession)),
                 HttpStatus.OK);
+    }
+
+    @DeleteMapping("user/cart")
+    public ResponseEntity<?> deleteProductFromCart(@RequestBody CartDTO cartDTO, HttpSession httpSession) {
+        return cartService.deleteProductFromCart(cartDTO, userService.getCurrentUser(httpSession));
     }
 }

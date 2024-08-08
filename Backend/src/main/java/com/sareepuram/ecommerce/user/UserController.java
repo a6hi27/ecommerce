@@ -42,8 +42,8 @@ public class UserController {
     }
 
     @PutMapping("user/{id}")
-    public void updateUser(@RequestBody User user) {
-        userService.updateUser(user);
+    public User updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
     }
 
     @DeleteMapping("user/{id}")

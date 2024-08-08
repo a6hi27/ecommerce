@@ -1,19 +1,15 @@
 package com.sareepuram.ecommerce.product;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sareepuram.ecommerce.cart.Cart;
+import com.sareepuram.ecommerce.order.Order;
 
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -33,6 +29,6 @@ public class Product implements Serializable {
     private String productDescription;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonManagedReference
-    private List<Cart> users;
+    @JsonManagedReference(value = "cart_product")
+    private List<Cart> users = new ArrayList<>();
 }

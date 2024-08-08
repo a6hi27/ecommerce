@@ -1,17 +1,14 @@
 package com.sareepuram.ecommerce.cart;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sareepuram.ecommerce.order.Order;
 import com.sareepuram.ecommerce.product.Product;
 import com.sareepuram.ecommerce.user.User;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
@@ -33,8 +30,11 @@ public class Cart implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value = "cart_product")
     @JoinColumn(name = "product_id")
     private Product product;
     private int quantity;
+    @ManyToMany(mappedBy = "productsInOrder")
+    @JsonBackReference
+    private List<Order> ordersContainingProduct;
 }
